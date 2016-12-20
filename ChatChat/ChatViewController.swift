@@ -49,6 +49,10 @@ final class ChatViewController: JSQMessagesViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        addMessage(withId: "foo", name: "Mr. Bolt", text: "I am so fast")
+        addMessage(withId: senderId, name: "Me", text: "I bet I can run faster than you")
+        addMessage(withId: senderId, name: "Me", text: "I like to run!")
+        finishReceivingMessage()
     }
     
     // MARK: Collection view data source (and related) methods
@@ -73,7 +77,25 @@ final class ChatViewController: JSQMessagesViewController {
         return nil
     }
     
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = super.collectionView(collectionView, cellForItemAt:indexPath) as! JSQMessagesCollectionViewCell
+        let message = messages[indexPath.item]
+        
+        if message.senderId == senderId {
+            cell.textView?.textColor = UIColor.white
+        } else {
+            cell.textView?.textColor = UIColor.black
+        }
+        
+        return cell
+    }
+    
     // MARK: Firebase related methods
+    private func addMessage(withId id: String, name: String, text: String) {
+        if let message = JSQMessage(senderId: id, displayName: name, text: text) {
+            messages.append(message)
+        }
+    }
     
     // MARK: UI and User Interaction
     private func setupOutgoingBubble() -> JSQMessagesBubbleImage {
