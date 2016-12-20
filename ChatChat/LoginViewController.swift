@@ -41,6 +41,15 @@ class LoginViewController: UIViewController {
     NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
   }
+    
+    //MARK: Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        let navVc = segue.destination as! UINavigationController
+        let channelVc = navVc.viewControllers.first as! ChannelListViewController
+        
+        channelVc.senderDisplayName = nameField?.text
+    }
   
   @IBAction func loginDidTouch(_ sender: AnyObject) {
     if nameField.text != "" {
