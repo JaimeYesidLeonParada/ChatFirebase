@@ -22,6 +22,7 @@
 
 import UIKit
 import Firebase
+import Photos
 import JSQMessagesViewController
 
 final class ChatViewController: JSQMessagesViewController {
@@ -53,6 +54,8 @@ final class ChatViewController: JSQMessagesViewController {
     }
     
     private lazy var usersTypingQuery: FIRDatabaseQuery = self.channelRef!.child("typingIndicator").queryOrderedByValue().queryEqual(toValue: true)
+    
+    lazy var storageRef : FIRStorageReference = FIRStorage.storage().reference(forURL: "gs://chatfirebase-80d88.appspot.com")
     
     // MARK: View Lifecycle
     override func viewDidLoad() {
