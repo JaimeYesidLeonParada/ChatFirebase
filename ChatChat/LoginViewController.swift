@@ -22,25 +22,37 @@
 
 import UIKit
 import Firebase
+import FBSDKLoginKit
+import FacebookCore
 
 class LoginViewController: UIViewController {
+    
+    @IBOutlet weak var nameField: UITextField!
+    @IBOutlet weak var bottomLayoutGuideConstraint: NSLayoutConstraint!
+    
+    // MARK: View Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let login = FBSDKLoginButton()
+        login.readPermissions = ["public_profile", "email", "user_friends"]
+        login.center = view.center
+        login.delegate = self
+        
+        view.addSubview(login)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShowNotification(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHideNotification(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
   
-  @IBOutlet weak var nameField: UITextField!
-  @IBOutlet weak var bottomLayoutGuideConstraint: NSLayoutConstraint!
-  
-  // MARK: View Lifecycle
-  
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShowNotification(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHideNotification(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-  }
-  
-  override func viewWillDisappear(_ animated: Bool) {
-    super.viewWillDisappear(animated)
-    NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-    NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-  }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
     
     //MARK: Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -51,29 +63,45 @@ class LoginViewController: UIViewController {
         channelVc.senderDisplayName = nameField?.text
     }
   
-  @IBAction func loginDidTouch(_ sender: AnyObject) {
-    if nameField.text != "" {
-        FIRAuth.auth()?.signInAnonymously(completion: {(user, error) in
-            if let err = error {
-                print(err.localizedDescription)
-                return
-            }
-            self.performSegue(withIdentifier: "LoginToChat", sender: nil)
-        })
+    @IBAction func loginDidTouch(_ sender: AnyObject) {
+        if nameField.text != "" {
+            FIRAuth.auth()?.signInAnonymously(completion: {(user, error) in
+                if let err = error {
+                    print(err.localizedDescription)
+                    return
+                }
+                self.performSegue(withIdentifier: "LoginToChat", sender: nil)
+            })
+        }
     }
-  }
   
-  // MARK: - Notifications
+    // MARK: - Notifications
   
-  func keyboardWillShowNotification(_ notification: Notification) {
-    let keyboardEndFrame = ((notification as NSNotification).userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-    let convertedKeyboardEndFrame = view.convert(keyboardEndFrame, from: view.window)
-    bottomLayoutGuideConstraint.constant = view.bounds.maxY - convertedKeyboardEndFrame.minY
-  }
+    func keyboardWillShowNotification(_ notification: Notification) {
+        let keyboardEndFrame = ((notification as NSNotification).userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let convertedKeyboardEndFrame = view.convert(keyboardEndFrame, from: view.window)
+        bottomLayoutGuideConstraint.constant = view.bounds.maxY - convertedKeyboardEndFrame.minY
+    }
   
-  func keyboardWillHideNotification(_ notification: Notification) {
-    bottomLayoutGuideConstraint.constant = 48
-  }
-  
+    func keyboardWillHideNotification(_ notification: Notification) {
+        bottomLayoutGuideConstraint.constant = 48
+    }
 }
 
+// MARK: - Facebook Delegate
+
+extension LoginViewController : FBSDKLoginButtonDelegate {
+    
+    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+        print("Did logout")
+    }
+    
+    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+        
+        if error != nil {
+            print ("error: \(error.localizedDescription)")
+        } else {
+            print("Succes Login")
+        }
+    }
+}
