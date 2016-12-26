@@ -40,13 +40,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let user = FIRAuth.auth()?.currentUser {
             // User is signed in.
-            let name = user.displayName
-            let email = user.email
-            let photoUrl = user.photoURL
-            let uid = user.uid;
-            
-            print("Name: \(name), \(email), \(photoUrl), \(uid)")
-            
             self.window?.rootViewController = tabbarViewController
         } else {
             // No user is signed in.

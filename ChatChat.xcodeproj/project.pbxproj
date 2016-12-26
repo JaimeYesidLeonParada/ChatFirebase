@@ -20,6 +20,7 @@
 		BB5355841BEF765800321277 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB5355821BEF765800321277 /* LaunchScreen.storyboard */; };
 		BB53558F1BEF7E9700321277 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB53558E1BEF7E9700321277 /* ChatViewController.swift */; };
 		EAEA87C224141060910B62DE /* Pods_ChatChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A574F14912EDE7B9692EB17C /* Pods_ChatChat.framework */; };
+		FA9146641E10DB36008D2F70 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9146631E10DB36008D2F70 /* ProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		E8DDF38A1BEF88DC00B5F45A /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		E8DDF38C1BEF88E200B5F45A /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		F89A5BAB6247B9A9793D0436 /* Pods-ChatChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChatChat/Pods-ChatChat.debug.xcconfig"; sourceTree = "<group>"; };
+		FA9146631E10DB36008D2F70 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileViewController.swift; path = Controller/ProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				BB53557B1BEF765800321277 /* LoginViewController.swift */,
 				45A0D8F91D49419500F26729 /* ChannelListViewController.swift */,
 				BB53558E1BEF7E9700321277 /* ChatViewController.swift */,
+				FA9146631E10DB36008D2F70 /* ProfileViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 				BB53558F1BEF7E9700321277 /* ChatViewController.swift in Sources */,
 				45A0D8FA1D49419500F26729 /* ChannelListViewController.swift in Sources */,
 				BB53557A1BEF765800321277 /* AppDelegate.swift in Sources */,
+				FA9146641E10DB36008D2F70 /* ProfileViewController.swift in Sources */,
 				45A0D8FE1D49508800F26729 /* CreateChannelCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
