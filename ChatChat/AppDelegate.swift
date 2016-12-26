@@ -26,20 +26,46 @@ import FBSDKLoginKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-  var window: UIWindow?
-
-  private func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    FIRApp.configure()
-    FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     
-    return true
-  }
+    var window: UIWindow?
+
+    internal func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+        FIRApp.configure()
+        
+        let mainStoryboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let loginViewController : LoginViewController = mainStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        let tabbarViewController : UITabBarController = mainStoryboard.instantiateViewController(withIdentifier: "TabbarController") as! UITabBarController
+        
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        
+        if let user = FIRAuth.auth()?.currentUser {
+            // User is signed in.
+            let name = user.displayName
+            let email = user.email
+            let photoUrl = user.photoURL
+            let uid = user.uid;
+            
+            print("Name: \(name), \(email), \(photoUrl), \(uid)")
+            
+            self.window?.rootViewController = tabbarViewController
+        } else {
+            // No user is signed in.
+            self.window?.rootViewController = loginViewController
+        }
+        
+        self.window?.makeKeyAndVisible()
+        
+        return true
+    }
+    
+    private func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+    
+        return true
+    }
     
     internal func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        
         let handled : Bool = FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
-        
         return handled
     }
 

@@ -97,11 +97,22 @@ extension LoginViewController : FBSDKLoginButtonDelegate {
     }
     
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
-        
         if error != nil {
             print ("error: \(error.localizedDescription)")
         } else {
-            print("Succes Login")
+            
+            let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+            
+            FIRAuth.auth()?.signIn(with: credential) { (user, error) in
+                if error != nil {
+                    
+                    try! FIRAuth.auth()!.signOut()
+                    
+                    print ("error: \(error?.localizedDescription)")
+                } else {
+                    print("Succes Login: \(user)")
+                }
+            }
         }
     }
 }
