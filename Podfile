@@ -1,4 +1,4 @@
-platform :ios, "10.0"
+platform :ios, "8.0"
 use_frameworks!
 
 target 'ChatChat' do
@@ -6,6 +6,7 @@ target 'ChatChat' do
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
   pod 'JSQMessagesViewController'
+  pod 'SDWebImage'
   
   pod 'FacebookCore'
   pod 'FacebookLogin'

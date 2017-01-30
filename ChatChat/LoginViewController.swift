@@ -94,6 +94,7 @@ extension LoginViewController : FBSDKLoginButtonDelegate {
     
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
         print("Did logout")
+        try! FIRAuth.auth()!.signOut()
     }
     
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
@@ -105,12 +106,12 @@ extension LoginViewController : FBSDKLoginButtonDelegate {
             
             FIRAuth.auth()?.signIn(with: credential) { (user, error) in
                 if error != nil {
-                    
                     try! FIRAuth.auth()!.signOut()
-                    
                     print ("error: \(error?.localizedDescription)")
                 } else {
-                    print("Succes Login: \(user)")
+                    let mainStoryboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                    let tabbarViewController : UITabBarController = mainStoryboard.instantiateViewController(withIdentifier: "TabbarController") as! UITabBarController
+                    self.present(tabbarViewController, animated: true, completion: nil)
                 }
             }
         }

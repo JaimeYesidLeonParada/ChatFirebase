@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         
-        if let user = FIRAuth.auth()?.currentUser {
+        if ((FIRAuth.auth()?.currentUser) != nil) {
             // User is signed in.
             self.window?.rootViewController = tabbarViewController
         } else {
