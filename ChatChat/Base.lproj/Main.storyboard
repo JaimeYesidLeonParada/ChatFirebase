@@ -184,22 +184,23 @@
             </objects>
             <point key="canvasLocation" x="2640" y="389"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="a5r-cf-vzq">
+        <!--Contacts Table View Controller-->
+        <scene sceneID="Vyb-XX-wii">
             <objects>
-                <viewController id="CO8-pB-46d" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="fAX-0D-MrU"/>
-                        <viewControllerLayoutGuide type="bottom" id="1KZ-Vu-cDK"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="zmW-Uj-99G">
+                <tableViewController id="N9W-Hm-yeD" customClass="ContactsTableViewController" customModule="ChatChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ByO-0f-Yf7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" systemItem="contacts" id="Mii-kM-0ew"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2Sx-S3-9L7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <connections>
+                            <outlet property="dataSource" destination="N9W-Hm-yeD" id="Dp6-Xq-1qb"/>
+                            <outlet property="delegate" destination="N9W-Hm-yeD" id="gaH-jn-2yo"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" systemItem="contacts" id="NTI-kC-ggG"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bnp-oe-unT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="305" y="2127"/>
         </scene>
@@ -279,7 +280,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="x2j-kb-5mV" kind="relationship" relationship="viewControllers" id="DPe-7L-nBS"/>
-                        <segue destination="CO8-pB-46d" kind="relationship" relationship="viewControllers" id="6w3-XS-kEU"/>
+                        <segue destination="N9W-Hm-yeD" kind="relationship" relationship="viewControllers" id="QbY-qh-HIK"/>
                         <segue destination="WHr-rJ-ceL" kind="relationship" relationship="viewControllers" id="uyc-KX-6dr"/>
                     </connections>
                 </tabBarController>

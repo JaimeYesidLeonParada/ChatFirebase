@@ -102,16 +102,22 @@ extension LoginViewController : FBSDKLoginButtonDelegate {
             print ("error: \(error.localizedDescription)")
         } else {
             
-            let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
-            
-            FIRAuth.auth()?.signIn(with: credential) { (user, error) in
-                if error != nil {
-                    try! FIRAuth.auth()!.signOut()
-                    print ("error: \(error?.localizedDescription)")
-                } else {
-                    let mainStoryboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                    let tabbarViewController : UITabBarController = mainStoryboard.instantiateViewController(withIdentifier: "TabbarController") as! UITabBarController
-                    self.present(tabbarViewController, animated: true, completion: nil)
+            if result!.token != nil {
+                let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+                
+                FIRAuth.auth()?.signIn(with: credential) { (user, error) in
+                    if error != nil {
+                        try! FIRAuth.auth()!.signOut()
+                        print ("error: \(error?.localizedDescription)")
+                    } else {
+                        
+                        let userDefaults = UserDefaults.standard
+                        userDefaults.setValue(FBSDKAccessToken.current().tokenString, forKey: "FBSDKAccessToken.tokenString")
+                        
+                        let mainStoryboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                        let tabbarViewController : UITabBarController = mainStoryboard.instantiateViewController(withIdentifier: "TabbarController") as! UITabBarController
+                        self.present(tabbarViewController, animated: true, completion: nil)
+                    }
                 }
             }
         }
