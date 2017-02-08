@@ -20,7 +20,6 @@
 		BB53558F1BEF7E9700321277 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB53558E1BEF7E9700321277 /* ChatViewController.swift */; };
 		EAEA87C224141060910B62DE /* Pods_ChatChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A574F14912EDE7B9692EB17C /* Pods_ChatChat.framework */; };
 		FA1E9A3A1E3EF2C600392ACD /* ContactsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1E9A391E3EF2C600392ACD /* ContactsTableViewController.swift */; };
-		FA1E9A3C1E3F048900392ACD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA1E9A3B1E3F048900392ACD /* GoogleService-Info.plist */; };
 		FA9146641E10DB36008D2F70 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9146631E10DB36008D2F70 /* ProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -46,7 +45,6 @@
 		E8DDF38C1BEF88E200B5F45A /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		F89A5BAB6247B9A9793D0436 /* Pods-ChatChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChatChat/Pods-ChatChat.debug.xcconfig"; sourceTree = "<group>"; };
 		FA1E9A391E3EF2C600392ACD /* ContactsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactsTableViewController.swift; path = Controller/ContactsTableViewController.swift; sourceTree = "<group>"; };
-		FA1E9A3B1E3F048900392ACD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FA9146631E10DB36008D2F70 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileViewController.swift; path = Controller/ProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -126,7 +124,6 @@
 		BB5355911BEF817A00321277 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				FA1E9A3B1E3F048900392ACD /* GoogleService-Info.plist */,
 				BB1E97061C147BAA00E34853 /* ChatChat-Bridging-Header.h */,
 				BB5355791BEF765800321277 /* AppDelegate.swift */,
 				459780D21D6465FB007BE66F /* UIImage+Gif.swift */,
@@ -225,7 +222,6 @@
 			files = (
 				BB5355841BEF765800321277 /* LaunchScreen.storyboard in Resources */,
 				BB5355811BEF765800321277 /* Assets.xcassets in Resources */,
-				FA1E9A3C1E3F048900392ACD /* GoogleService-Info.plist in Resources */,
 				459E535F1D4BF36A00E675A5 /* License in Resources */,
 				BB53557F1BEF765800321277 /* Main.storyboard in Resources */,
 			);
